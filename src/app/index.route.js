@@ -5,7 +5,7 @@ export function routerConfig ($stateProvider, $urlRouterProvider) {
       url: '/',
       templateUrl: 'app/whatsapp-intercom/whatsapp-intercom.html',
       controller: 'CommController',
-      controllerAs: 'ctrl'
+      controllerAs: 'comCtrl'
     });
 
   $urlRouterProvider.otherwise('/');
