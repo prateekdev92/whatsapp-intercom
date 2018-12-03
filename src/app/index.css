@@ -60,6 +60,13 @@
   cursor: pointer;
 }
 
+.message-box{
+  background-color: #e5ddd5;
+  height: 78vh;
+  padding: 20px;
+  overflow-y: scroll
+}
+
 .message {
   background-color: #dcf7c6;
   padding: 8px;

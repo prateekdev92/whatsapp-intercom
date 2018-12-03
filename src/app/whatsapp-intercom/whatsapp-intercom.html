@@ -39,14 +39,14 @@
             <div flex></div>
           </div>
           <div layout="column">
-            <div style="background-color: #e5ddd5;height: 82vh;padding-top: 10px;padding-right: 20px;">
+            <div class="message-box" id="messageBox">
               <div ng-repeat="data in comCtrl.messages_list">
                 <div ng-class="{'my-messages': data.by == 'me', 'reply-messages': data.by != 'me' }" class="message">{{data.message}}</div>
               </div>
             </div>
             <div class="side-pane-search" style="border-radius: 0px;height: 6vh;">
               <i class="fa fa-search"></i>
-              <input type="text" ng-model="comCtrl.reply_msg" placeholder="Type your message" ng-keypress="($event.which === 13)?comCtrl.chat_push_message(comCtrl.reply_msg, comCtrl.showFullViewData):return" name="" class="nullify-input" style="line-height:1.5em;">
+              <input type="text" ng-model="comCtrl.reply_msg" placeholder="Type your message" ng-keypress="($event.which === 13)?comCtrl.chat_user_submitted(comCtrl.reply_msg, comCtrl.showFullViewData, 'me'):return" name="" class="nullify-input" style="line-height:1.5em;">
             </div>
           </div>
         </div>
