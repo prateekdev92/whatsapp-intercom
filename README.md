@@ -1,6 +1,7 @@
 # WhatsApp InterCom App!
 
   - A WhatsApp like WebApp using WebSockets
+  - ScreenShot: https://i.imgur.com/OKzypCil.png
 
 ### Tech
 
