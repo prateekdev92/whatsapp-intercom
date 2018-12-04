@@ -60,7 +60,7 @@
   cursor: pointer;
 }
 
-.message-box{
+.message-box {
   background-color: #e5ddd5;
   height: 78vh;
   padding: 20px;
@@ -68,12 +68,38 @@
 }
 
 .message {
+  position: relative;
+  min-height: 30px;
+  min-width: 60px;
   background-color: #dcf7c6;
-  padding: 8px;
+  padding: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
   margin: 5px;
   display: inline-block;
   border-radius: 5px;
-  box-shadow: 0px 0px 5px 0px #ccc
+  box-shadow: 0px 0px 5px 0px #ccc;
+  max-width: 45%;
+}
+
+.selected-friend {
+  background-color: #e6f0ff;
+}
+
+.message-time {
+  position: absolute;
+  font-size: 0.7em;
+  color: #666;
+  right: 15px;
+  bottom: 1px;
+  margin-top: 5px;
+  margin-right: 5px;
+}
+
+.sent-check {
+  position: absolute;
+  right: 2px;
+  bottom: 1px;
 }
 
 .my-messages {
@@ -91,10 +117,33 @@
   width: 42px;
   height: 42px;
   vertical-align: middle;
+  cursor: pointer;
+}
+
+.no-outline {
+  outline: 0px;
+}
+
+.offline-toast h4 {
+  font-weight: 400;
+  margin: 0px;
+}
+
+.offline-toast {
+  position: fixed;
+  bottom: 5%;
+  left: 50%;
+  background-color: #333;
+  color: #fff;
+  padding: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 6px;
 }
 
 .padding-left-sm {
   padding-left: 20px;
+
 }
 
 .padding-left-med {
@@ -102,7 +151,8 @@
 }
 
 
-html {
+html,
+h2 {
   font-family: 'Roboto Slab', serif;
 }
 

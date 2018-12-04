@@ -1,25 +1,25 @@
 <div layout="row">
   <div flex="25" align="left" class="side-pane">
     <div layout="row" class="chat-header">
-      <div flex="20" class="circle">
-        <div>
+      <div flex="20">
+        <div ng-click="comCtrl.showFullViewData = null;" class="no-outline">
           <img class="circle" src="/assets/images/avatar.png">
-  		</div>
+      </div>
         </div>
       </div>
       <div layout="row" class="side-pane-search-container">
         <div flex></div>
         <div flex="95" class="side-pane-search">
           <i class="fa fa-search"></i>
-          <input type="text" placeholder="Search Friends" ng-model="comCtrl.search" class="nullify-input">
+          <input type="text" placeholder="Search Friends" ng-model="comCtrl.search" ng-keyup="comCtrl.delayed_search(comCtrl.search, $event)" class="nullify-input">
         </div>
         <div flex></div>
       </div>
-      <div ng-repeat="data in comCtrl.friend_list | filter: comCtrl.search" class="friend-list-row" ng-click="comCtrl.showFullView(data)">
+      <div ng-repeat="data in comCtrl.friend_list" class="friend-list-row" ng-class="{'selected-friend': data.id == comCtrl.showFullViewData.id}" ng-click="comCtrl.showFullView(data)">
         <div layout="row" class="friend-list-item">
           <div flex="15" align="center">
             <img class="circle" src="/assets/images/avatar.png">
-  		</div>
+      </div>
             <div flex="80">
               <span class="padding-left-sm">{{data.fname}}</span><br />
               <span class="padding-left-med" style="color:#666;font-size: 0.8em;">{{data.lname}} let's catch up over a coffee</span>
@@ -31,7 +31,7 @@
         <div layout="row" class="chat-header">
           <div flex=5>
             <img class="circle" src="/assets/images/avatar.png">
-        	</div>
+          </div>
             <div flex=20>
               <span  class="header-fullview-name">{{comCtrl.showFullViewData.fname}} {{comCtrl.showFullViewData.lname}}</span>
               <div style="color:#666;font-size: 0.8em;">Online</div>
@@ -40,14 +40,26 @@
           </div>
           <div layout="column">
             <div class="message-box" id="messageBox">
-              <div ng-repeat="data in comCtrl.messages_list">
-                <div ng-class="{'my-messages': data.by == 'me', 'reply-messages': data.by != 'me' }" class="message">{{data.message}}</div>
+              <div ng-repeat="data in comCtrl.messages_list" ng-show="comCtrl.AppOnline">
+                <div ng-class="{'my-messages': data.by == 'me', 'reply-messages': data.by != 'me' }" class="message">{{data.message}}
+                  <div class="message-time">
+                    {{data.time | date:"hh:mm"}}
+                  </div>
+                  <div class="sent-check">
+                    <img ng-if="data.by == 'me'" src="/assets/images/double-check.png" height="10px" width="12px" />
+                  </div>
+                  </div>
+                </div>
+                <div ng-hide="comCtrl.AppOnline" align="center">
+                </div>
               </div>
-            </div>
-            <div class="side-pane-search" style="border-radius: 0px;height: 6vh;">
-              <i class="fa fa-search"></i>
-              <input type="text" ng-model="comCtrl.reply_msg" placeholder="Type your message" ng-keypress="($event.which === 13)?comCtrl.chat_user_submitted(comCtrl.reply_msg, comCtrl.showFullViewData, 'me'):return" name="" class="nullify-input" style="line-height:1.5em;">
+              <div class="side-pane-search" style="border-radius: 0px;height: 6vh;">
+                <i class="fa fa-search"></i>
+                <input type="text" ng-model="comCtrl.reply_msg" placeholder="Type your message" ng-keypress="($event.which === 13 && comCtrl.AppOnline)?comCtrl.chat_user_submitted(comCtrl.reply_msg, comCtrl.showFullViewData, 'me'):return" name="" class="nullify-input" style="line-height:1.5em;">
+              </div>
             </div>
           </div>
         </div>
-      </div>
+        <div ng-hide="comCtrl.AppOnline" class="offline-toast" align="center">
+          <h4><i class="fa fa-plug"></i> Check your Internet Connection !</h4>
+        </div>
